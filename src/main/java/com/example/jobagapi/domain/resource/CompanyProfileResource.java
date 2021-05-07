@@ -1,33 +1,19 @@
-package com.example.jobagapi.domain.model;
+package com.example.jobagapi.domain.resource;
 
-import javax.persistence.*;
+import com.example.jobagapi.domain.model.AuditModel;
+import com.example.jobagapi.domain.model.Employeer;
+
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.util.List;
 
-
-@Entity
-@Table(name = "company_profile")
-public class CompanyProfile extends AuditModel{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+public class CompanyProfileResource extends AuditModel {
     private Long id;
-    @OneToOne(mappedBy = "companyProfile")
     private Employeer employeer;
-
-    @NotNull
     private String direction;
-
-    @NotNull
     private String disctrict;
-
-    @NotNull
     private String city;
-
-    @NotNull
     private String country;
-
-
 
     public Long getId() {
         return id;
@@ -35,6 +21,14 @@ public class CompanyProfile extends AuditModel{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Employeer getEmployeer() {
+        return employeer;
+    }
+
+    public void setEmployeer(Employeer employeer) {
+        this.employeer = employeer;
     }
 
     public String getDirection() {

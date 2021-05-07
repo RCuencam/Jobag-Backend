@@ -1,6 +1,7 @@
 package com.example.jobagapi.domain.repository;
 
 import com.example.jobagapi.domain.model.Employeer;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface EmployeerRepository extends JpaRepository<Employeer,Long> {
-    Page<Employeer> findByCompanyProfileId(Long company_profile_id,Pageable pageable );
+    public Page<Employeer> findById(Long Id, Pageable page);
 }
