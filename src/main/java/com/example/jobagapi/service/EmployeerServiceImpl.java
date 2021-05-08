@@ -15,10 +15,6 @@ public class EmployeerServiceImpl implements EmployeerService {
     @Autowired
     private EmployeerRepository employeerRepository;
 
-    /*@Autowired
-    private CompanyProfileRepository companyProfileRepository;*/
-    /*@Autowired
-    private InterviewRepository interviewRepository;*/
 
     @Override
     public Page<Employeer> getAllEmployeers(Pageable pageable) {

@@ -19,55 +19,62 @@ public class EmployeerResource extends AuditModel {
         return id;
     }
 
-    public void setId(Long id) {
+    public EmployeerResource setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getPosicion() {
         return posicion;
     }
 
-    public void setPosicion(String posicion) {
+    public EmployeerResource setPosicion(String posicion) {
         this.posicion = posicion;
+        return this;
     }
 
     public String getFirstname() {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
+    public EmployeerResource setFirstname(String firstname) {
         this.firstname = firstname;
+        return this;
     }
 
     public String getLastname() {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
+    public EmployeerResource setLastname(String lastname) {
         this.lastname = lastname;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public EmployeerResource setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public Long getNumber() {
         return number;
     }
 
-    public void setNumber(Long number) {
+    public EmployeerResource setNumber(Long number) {
         this.number = number;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public EmployeerResource setPassword(String password) {
         this.password = password;
+        return this;
     }
 }

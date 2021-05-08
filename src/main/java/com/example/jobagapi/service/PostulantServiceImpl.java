@@ -1,5 +1,6 @@
 package com.example.jobagapi.service;
 
+import com.example.jobagapi.domain.model.Employeer;
 import com.example.jobagapi.domain.model.Postulant;
 import com.example.jobagapi.domain.repository.PostulantRepository;
 import com.example.jobagapi.domain.service.PostulantService;
@@ -25,8 +26,7 @@ public class PostulantServiceImpl implements PostulantService {
     @Override
     public Postulant getPostulantById(Long postulantId) {
         return postulantRepository.findById(postulantId)
-                .orElseThrow(()->new ResourceNotFoundException("Postulant", "Id",postulantId));
-
+                .orElseThrow(()->new ResourceNotFoundException("Employeer","Id",postulantId));
     }
 
     @Override
@@ -35,9 +35,9 @@ public class PostulantServiceImpl implements PostulantService {
     }
 
     @Override
-    public ResponseEntity<?> deleteEPostulant(Long postulantId) {
-        Postulant postulant = postulantRepository.findById(postulantId)
-                .orElseThrow(()->new ResourceNotFoundException("Postulant", "Id",postulantId));
+    public ResponseEntity<?> deletePostulant(Long postulantId) {
+        Postulant postulant=postulantRepository.findById(postulantId)
+                .orElseThrow(() -> new ResourceNotFoundException("Postulant", "Id", postulantId));
         postulantRepository.delete(postulant);
         return ResponseEntity.ok().build();
     }

@@ -19,47 +19,53 @@ public class CompanyProfileResource extends AuditModel {
         return id;
     }
 
-    public void setId(Long id) {
+    public CompanyProfileResource setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public Employeer getEmployeer() {
         return employeer;
     }
 
-    public void setEmployeer(Employeer employeer) {
+    public CompanyProfileResource setEmployeer(Employeer employeer) {
         this.employeer = employeer;
+        return this;
     }
 
     public String getDirection() {
         return direction;
     }
 
-    public void setDirection(String direction) {
+    public CompanyProfileResource setDirection(String direction) {
         this.direction = direction;
+        return this;
     }
 
     public String getDisctrict() {
         return disctrict;
     }
 
-    public void setDisctrict(String disctrict) {
+    public CompanyProfileResource setDisctrict(String disctrict) {
         this.disctrict = disctrict;
+        return this;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public CompanyProfileResource setCity(String city) {
         this.city = city;
+        return this;
     }
 
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public CompanyProfileResource setCountry(String country) {
         this.country = country;
+        return this;
     }
 }

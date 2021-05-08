@@ -33,39 +33,48 @@ public class CompanyProfile extends AuditModel{
         return id;
     }
 
-    public void setId(Long id) {
+    public CompanyProfile setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getDirection() {
         return direction;
     }
 
-    public void setDirection(String direction) {
+    public CompanyProfile setDirection(String direction) {
         this.direction = direction;
+        return this;
     }
 
     public String getDisctrict() {
         return disctrict;
     }
 
-    public void setDisctrict(String disctrict) {
+    public CompanyProfile setDisctrict(String disctrict) {
         this.disctrict = disctrict;
+        return this;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public CompanyProfile setCity(String city) {
         this.city = city;
+        return this;
     }
 
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public CompanyProfile setCountry(String country) {
         this.country = country;
+        return this;
+    }
+
+    public void setEmployeer(Employeer employeer) {
+        this.employeer = employeer;
     }
 }
