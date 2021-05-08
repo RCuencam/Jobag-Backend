@@ -6,80 +6,74 @@ import javax.validation.constraints.Size;
 
 public class SaveEmployeerResource {
     @NotNull
-    @NotBlank
-    @Size(max = 50)
     public String posicion;
 
     @NotNull
-    @NotBlank
-    @Size(max = 30)
     private String firstname;
 
     @NotNull
-    @NotBlank
-    @Size(max = 30)
     private String lastname;
 
     @NotNull
-    @NotBlank
-    @Size(max = 50)
     private String email;
 
     @NotNull
-    @NotBlank
-    @Size(max = 15)
     private Long number;
 
     @NotNull
-    @NotBlank
-    @Size(max = 20)
     private String password;
 
     public String getPosicion() {
         return posicion;
     }
 
-    public void setPosicion(String posicion) {
+    public SaveEmployeerResource setPosicion(String posicion) {
         this.posicion = posicion;
+        return this;
     }
 
     public String getFirstname() {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
+    public SaveEmployeerResource setFirstname(String firstname) {
         this.firstname = firstname;
+        return this;
     }
 
     public String getLastname() {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
+    public SaveEmployeerResource setLastname(String lastname) {
         this.lastname = lastname;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public SaveEmployeerResource setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public Long getNumber() {
         return number;
     }
 
-    public void setNumber(Long number) {
+    public SaveEmployeerResource setNumber(Long number) {
         this.number = number;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public SaveEmployeerResource setPassword(String password) {
         this.password = password;
+        return this;
     }
 }

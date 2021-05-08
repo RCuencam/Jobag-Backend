@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "postulant")
-public class Postulant extends AuditModel{
+public class    Postulant extends AuditModel{
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)

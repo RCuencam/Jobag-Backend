@@ -1,6 +1,7 @@
 package com.example.jobagapi.domain.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public abstract class AuditModel implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_at", nullable = false)
+    @LastModifiedDate
     private Date updateAt;
 
     public Date getCreatedAt() {
@@ -31,11 +33,13 @@ public abstract class AuditModel implements Serializable {
         return updateAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public AuditModel setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+        return this;
     }
 
-    public void setUpdateAt(Date updateAt) {
+    public AuditModel setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
+        return this;
     }
 }

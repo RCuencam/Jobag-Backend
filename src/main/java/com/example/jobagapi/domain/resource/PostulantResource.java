@@ -11,57 +11,94 @@ import java.util.Date;
 public class PostulantResource extends AuditModel {
 
     private Long id;
-    private User user;
-    private ProfessionalProfile profesionalId;
+    private String firstname;
+    private String lastname;
+    private String email;
+    private Long number;
+    private String password;
     private String document;
     private Date birthday;
     private String civil_status;
+
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public PostulantResource setId(Long id) {
         this.id = id;
+        return this;
     }
 
-    public User getUser() {
-        return user;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public PostulantResource setFirstname(String firstname) {
+        this.firstname = firstname;
+        return this;
     }
 
-    public ProfessionalProfile getProfesionalId() {
-        return profesionalId;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setProfesionalId(ProfessionalProfile profesionalId) {
-        this.profesionalId = profesionalId;
+    public PostulantResource setLastname(String lastname) {
+        this.lastname = lastname;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public PostulantResource setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public Long getNumber() {
+        return number;
+    }
+
+    public PostulantResource setNumber(Long number) {
+        this.number = number;
+        return this;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public PostulantResource setPassword(String password) {
+        this.password = password;
+        return this;
     }
 
     public String getDocument() {
         return document;
     }
 
-    public void setDocument(String document) {
+    public PostulantResource setDocument(String document) {
         this.document = document;
+        return this;
     }
 
     public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public PostulantResource setBirthday(Date birthday) {
         this.birthday = birthday;
+        return this;
     }
 
     public String getCivil_status() {
         return civil_status;
     }
 
-    public void setCivil_status(String civil_status) {
+    public PostulantResource setCivil_status(String civil_status) {
         this.civil_status = civil_status;
+        return this;
     }
 }
