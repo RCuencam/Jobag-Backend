@@ -1,8 +1,7 @@
 package com.example.jobagapi.resource;
 
 public class SectorResource {
-    Long id;
-
+    private Long id;
     private String name;
     private String description;
 

@@ -4,8 +4,6 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 public class SaveUserResource {
-
-
     @NotNull
     private String firstname;
 

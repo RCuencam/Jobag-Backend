@@ -31,6 +31,15 @@ public class SkillServiceImpl implements SkillService {
         return skillRepository.save(skill);
     }
 
+    @Override
+    public Skill updateSkill(Long skillId, Skill skillRequest) {
+        Skill skill = skillRepository.findById(skillId)
+                .orElseThrow(() -> new ResourceNotFoundException("Skill","Id",skillId));
+        return  skillRepository.save(
+                skill.setName(skillRequest.getName())
+                .setDescription(skillRequest.getDescription()));
+    }
+
 
     @Override
     public ResponseEntity<?> deleteSkill(Long skillId) {

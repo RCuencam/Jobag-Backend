@@ -11,30 +11,21 @@ public class User extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NotNull
     private String firstname;
-
     @NotNull
     private String lastname;
-
     @Column(unique = true)
     @NotNull
     private String email;
-
     @NotNull
     private Long number;
-
     @NotNull
     private String password;
-
     private String document;
-
-
     public User (){
         super();
     }
-
 
     public User(Long id,  @NotNull String firstname,  @NotNull String lastname,  @NotNull String email, @NotNull Long number, @NotNull String password, String document) {
        super();

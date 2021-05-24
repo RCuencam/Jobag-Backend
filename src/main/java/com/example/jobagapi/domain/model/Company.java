@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @NotNull
     @Length(max = 100)

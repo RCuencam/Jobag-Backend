@@ -25,8 +25,6 @@ public class UserController {
     @Autowired
     private ModelMapper mapper;
 
-
-
     @Operation(summary="Get Users", description="Get All Users", tags={"Users"})
     @GetMapping("/users")
     public Page<UserResource> getAllUsers(Pageable pageable){
@@ -51,8 +49,6 @@ public class UserController {
     public UserResource getUserById(@PathVariable(name = "id") Long userId) {
         return convertToResource(userService.getUserById(userId));
     }
-
-
 
 
     private User convertToEntity(SaveUserResource resource) {

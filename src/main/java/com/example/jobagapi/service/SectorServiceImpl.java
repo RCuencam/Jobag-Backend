@@ -15,7 +15,6 @@ public class SectorServiceImpl implements SectorService {
     @Autowired
     private SectorRepository sectorRepository;
 
-
     @Override
     public Page<Sector> getAllSectors(Pageable pageable) {
         return sectorRepository.findAll(pageable);
@@ -30,6 +29,15 @@ public class SectorServiceImpl implements SectorService {
     @Override
     public Sector createSector(Sector sector) {
         return sectorRepository.save(sector);
+    }
+
+    @Override
+    public Sector updateSector(Long sectorId, Sector sectorRequest) {
+        Sector sector = sectorRepository.findById(sectorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Sector","Id",sectorId));
+        return sectorRepository.save(
+                sector.setName(sectorRequest.getName())
+                .setDescription(sectorRequest.getDescription()));
     }
 
 

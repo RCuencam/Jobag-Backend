@@ -8,13 +8,9 @@ import java.util.List;
 @Table(name = "professional_profile")
 public class ProfessionalProfile extends AuditModel{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-
-
-
     private String ocupation;
     private String video;
     private String experience;

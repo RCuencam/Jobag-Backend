@@ -9,5 +9,6 @@ public interface LanguagesService {
     Page<Languages> getAllLanguages(Pageable pageable);
     Languages getLanguagesById(Long languagesId);
     Languages createLanguages(Languages languages);
+    Languages updateLanguages(Long languagesId, Languages languagesRequest);
     ResponseEntity<?> deleteLanguages(Long languagesId);
 }
