@@ -1,6 +1,9 @@
 package com.example.jobagapi.controller;
 
+import com.example.jobagapi.domain.model.Sector;
 import com.example.jobagapi.domain.model.Skill;
+import com.example.jobagapi.resource.SaveSectorResource;
+import com.example.jobagapi.resource.SectorResource;
 import com.example.jobagapi.resource.SkillResource;
 import com.example.jobagapi.resource.SaveSkillResource;
 import com.example.jobagapi.domain.service.SkillService;
@@ -28,6 +31,13 @@ public class SkillController {
 
     @Autowired
     private ModelMapper mapper;
+
+    @Operation(summary="Update Skill", description="Update Skill", tags={"Skills"})
+    @PutMapping("/skills/{skillId}")
+    public SkillResource updateSector(@PathVariable Long skillId, @Valid @RequestBody SaveSkillResource resource){
+        Skill skill = convertToEntity(resource);
+        return convertToResource(skillService.updateSkill(skillId,skill));
+    }
 
     @Operation(summary="Get Skills", description="Get All Skills", tags={"Skills"})
     @GetMapping("/skills")

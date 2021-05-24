@@ -1,9 +1,12 @@
 package com.example.jobagapi.controller;
 
 import com.example.jobagapi.domain.model.Languages;
+import com.example.jobagapi.domain.model.Sector;
 import com.example.jobagapi.resource.LanguagesResource;
 import com.example.jobagapi.resource.SaveLanguaguesResource;
 import com.example.jobagapi.domain.service.LanguagesService;
+import com.example.jobagapi.resource.SaveSectorResource;
+import com.example.jobagapi.resource.SectorResource;
 import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,13 @@ public class LanguagesController {
     @Autowired
     private ModelMapper mapper;
 
+    @Operation(summary="Update Languages", description="Update Languages", tags={"Languages"})
+    @PutMapping("/languages/{languagesId}")
+    public LanguagesResource updateLanguages(@PathVariable Long languagesId, @Valid @RequestBody SaveLanguaguesResource resource){
+        Languages languages = convertToEntity(resource);
+        return convertToResource(languagesService.updateLanguages(languagesId,languages));
+    }
+
     @Operation(summary = "Get Languages", description = "Get All Languages", tags = {"Languages"})
     @GetMapping("/languages")
     public Page<LanguagesResource> getAllLanguages(Pageable pageable){
@@ -44,7 +54,7 @@ public class LanguagesController {
 
     @Operation(summary = "Get Languages by Id", description = "Get Languages by Id", tags = {"Languages"})
     @GetMapping("/languages/{languagesId}")
-    public LanguagesResource gerLanguaesById(@PathVariable Long languagesId){
+    public LanguagesResource getLanguaesById(@PathVariable Long languagesId){
         return convertToResource(languagesService.getLanguagesById(languagesId));
     }
     @Operation(summary = "Delete Language", description = "Delete Language", tags = {"Languages"})

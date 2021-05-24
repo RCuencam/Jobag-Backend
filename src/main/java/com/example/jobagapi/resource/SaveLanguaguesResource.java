@@ -1,14 +1,11 @@
 package com.example.jobagapi.resource;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class SaveLanguaguesResource {
-
-    @NotNull
+    @Size(max = 30)
     private String name;
-    @NotNull
     private Long level;
-
 
     public String getName() {
         return name;

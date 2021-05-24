@@ -10,6 +10,7 @@ public interface SectorService {
     Page<Sector> getAllSectors(Pageable pageable);
     Sector getSectorById(Long sectorId);
     Sector createSector(Sector sector );
-
+    Sector updateSector(Long sectorId, Sector sectorRequest);
     ResponseEntity<?> deleteSector(Long sectorId);
+
 }

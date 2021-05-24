@@ -26,8 +26,6 @@ public class SectorController {
     @Autowired
     private ModelMapper mapper;
 
-
-
     @Operation(summary="Get Sectors", description="Get All Sectors", tags={"Sectors"})
     @GetMapping("/sectors")
     public Page<SectorResource> getAllSectors(Pageable pageable){
@@ -46,6 +44,13 @@ public class SectorController {
         return convertToResource(sectorService.createSector(sector));
     }
 
+    @Operation(summary="Update Sector", description="Update Sector", tags={"Sectors"})
+    @PutMapping("/sector/{sectorId}")
+    public SectorResource updateSector(@PathVariable Long sectorId, @Valid @RequestBody SaveSectorResource resource){
+        Sector sector = convertToEntity(resource);
+        return convertToResource(sectorService.updateSector(sectorId,sector));
+    }
+
     @Operation(summary="Get SectorsById", description="Get SectorsById", tags={"Sectors"})
     @GetMapping("/sector/{id}")
     public SectorResource getSectorById(@PathVariable(name = "id") Long sectorId) {
@@ -53,15 +58,10 @@ public class SectorController {
     }
 
     @Operation(summary="Delete Sector By Id", description="DeleteSectorById", tags={"Sectors"})
-    @DeleteMapping("/sector/{postId}}")
-
+    @DeleteMapping("/sector/{sectorId}}")
     public ResponseEntity<?> deleteSector(@PathVariable Long sectorId) {
         return sectorService.deleteSector(sectorId);
     }
-
-
-
-
 
     private Sector convertToEntity(SaveSectorResource resource) {
         return mapper.map(resource, Sector.class);

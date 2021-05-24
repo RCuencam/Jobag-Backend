@@ -1,15 +1,19 @@
 package com.example.jobagapi.domain.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name ="sectors")
 public class Sector {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-
+    private Long id;
+    @NotNull
     private String name;
+    @NotNull
+    @Size(max = 70)
     private String description;
 
 

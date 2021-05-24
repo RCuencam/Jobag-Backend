@@ -1,6 +1,7 @@
 package com.example.jobagapi.service;
 
 import com.example.jobagapi.domain.model.Languages;
+import com.example.jobagapi.domain.model.Sector;
 import com.example.jobagapi.domain.repository.LanguagesRepository;
 import com.example.jobagapi.domain.service.LanguagesService;
 import com.example.jobagapi.exception.ResourceNotFoundException;
@@ -29,6 +30,15 @@ public class LanguagesServiceImpl implements LanguagesService {
     @Override
     public Languages createLanguages(Languages languages) {
         return languagesRepository.save(languages);
+    }
+
+    @Override
+    public Languages updateLanguages(Long languagesId, Languages languagesRequest) {
+        Languages languages = languagesRepository.findById(languagesId)
+                .orElseThrow(() -> new ResourceNotFoundException("Languages","Id",languagesId));
+        return languagesRepository.save(
+                languages.setName(languagesRequest.getName())
+                        .setLevel(languagesRequest.getLevel()));
     }
 
     @Override
