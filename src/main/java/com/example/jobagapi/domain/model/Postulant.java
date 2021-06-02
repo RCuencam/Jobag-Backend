@@ -12,6 +12,7 @@ import java.util.Date;
 @OnDelete(action = OnDeleteAction.CASCADE)
 public class Postulant extends User{
     private String civil_status;
+
     public Postulant(){
         super();
     }
@@ -20,6 +21,7 @@ public class Postulant extends User{
         this.civil_status = civil_status;
 
     }
+
     public String getCivil_status() {
         return civil_status;
     }
@@ -28,7 +30,6 @@ public class Postulant extends User{
         this.civil_status = civil_status;
         return this;
     }
-
 
 }
 

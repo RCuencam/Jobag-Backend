@@ -1,40 +1,37 @@
 package com.example.jobagapi.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
-@Table(name = "skill")
+@Table(name = "skills")
 public class Skill extends AuditModel{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "skill_id", nullable = false)
-//    @JsonIgnore
-//    private ProfessionalProfile professionalProfile;
-//    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-
-
     @NotNull
-    @Size(max = 50)
     private String name;
 
     @NotNull
-    @Size(max = 50)
     private String description;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            mappedBy = "skills")
+    private List<ProfessionalProfile> professionalprofiles;
 
     public Skill () {}
 
-  //  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  //  @JoinColumn(name = "skill_id", nullable = false)
-  //  @JsonIgnore
-  //  private ProfessionalProfile professionalProfile;
+    public Skill(Long id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
 
     public Long getId() {
         return id;
@@ -61,5 +58,13 @@ public class Skill extends AuditModel{
     public Skill setDescription(String description) {
         this.description = description;
         return this;
+    }
+
+    public List<ProfessionalProfile> getProfessionalprofiles() {
+        return professionalprofiles;
+    }
+
+    public void setProfessionalprofiles(List<ProfessionalProfile> professionalprofiles) {
+        this.professionalprofiles = professionalprofiles;
     }
 }
