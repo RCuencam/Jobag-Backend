@@ -8,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "jobOffer")
@@ -30,6 +32,20 @@ public class JobOffer extends AuditModel {
     @JoinColumn(name = "employeer_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Employeer employeer;
+
+    public List<PostulantJob> getPostulantJobs() {
+        return postulantJobs;
+    }
+
+    public void setPostulantJobs(List<PostulantJob> postulantJobs) {
+        this.postulantJobs = postulantJobs;
+    }
+
+    //Relacion con PostulantJob
+    @OneToMany(mappedBy = "JobOffer")
+    private List<PostulantJob> postulantJobs = new ArrayList<>();
+
+
     @NotNull
     @Size(max = 200)
     private String description;

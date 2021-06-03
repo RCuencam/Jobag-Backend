@@ -5,7 +5,9 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @PrimaryKeyJoinColumn(referencedColumnName="id")
@@ -31,5 +33,8 @@ public class Postulant extends User{
         return this;
     }
 
+    //Relacion con PostulantJob
+    @OneToMany(mappedBy = "postulant")
+    private List<PostulantJob> postulantJobs = new ArrayList<>();
 }
 
