@@ -39,8 +39,7 @@ public class SectorServiceImpl implements SectorService {
                 sector.setName(sectorRequest.getName())
                 .setDescription(sectorRequest.getDescription()));
     }
-
-
+    
     @Override
     public ResponseEntity<?> deleteSector(Long sectorId) {
         Sector sector=sectorRepository.findById(sectorId)

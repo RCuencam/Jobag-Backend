@@ -18,4 +18,5 @@ public interface CompanyRepository extends JpaRepository<Company,Long> {
     Page<Company> findBySectorId(Long sectorId, Pageable pageable); //Encontrar por Id
 
     public Optional<Company> findByIdAndSectorId(Long id, Long sectorId);
+
 }

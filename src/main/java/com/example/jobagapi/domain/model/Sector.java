@@ -13,7 +13,7 @@ public class Sector {
     @NotNull
     private String name;
     @NotNull
-    @Size(max = 70)
+    @Size(max  = 70)
     private String description;
 
 

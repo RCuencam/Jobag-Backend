@@ -12,6 +12,7 @@ public interface CompanyService {
     Company getCompanyByIdAndEmployeerId(Long employeerId, Long companysId);
     Page<Company> getAllCompanysBySectorId(Long sectorId, Pageable pageable);
     Company getCompanyByIdAndSectorId(Long sectorId, Long companysId);
+
     Company createCompany(Long employeerId, Company company);
     Company updateCompany(Long employeerId, Long companyId, Company companyDetails);
     ResponseEntity<?> deleteCompany(Long employeerId,  Long companyId);

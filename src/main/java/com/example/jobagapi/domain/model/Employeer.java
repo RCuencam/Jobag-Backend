@@ -15,7 +15,6 @@ public class Employeer extends User{
         @Column(unique = true)
         private String posicion;
 
-
         public Employeer(){
                 super();
         }
@@ -26,7 +25,6 @@ public class Employeer extends User{
 
         }
 
-
         public String getPosicion() {
                 return posicion;
         }
@@ -35,9 +33,6 @@ public class Employeer extends User{
                 this.posicion = posicion;
                 return this;
         }
-
-
-
 
 
 }
