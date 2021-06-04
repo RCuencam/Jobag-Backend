@@ -19,8 +19,6 @@ public class PostulantServiceImpl implements PostulantService {
     @Autowired
     private PostulantRepository postulantRepository;
 
-
-
     @Override
     public Page<Postulant> getAllPostulants(Pageable pageable) {
         return postulantRepository.findAll(pageable);

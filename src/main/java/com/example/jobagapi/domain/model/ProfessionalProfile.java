@@ -19,6 +19,7 @@ public class ProfessionalProfile{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @NotNull
     @Length(max = 100)
     private String ocupation;

@@ -19,4 +19,3 @@ public class JobagApiApplication {
         return new ModelMapper();
     }
 }
-
