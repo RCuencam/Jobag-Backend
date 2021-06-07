@@ -1,10 +1,7 @@
 package com.example.jobagapi.controller;
 
 import com.example.jobagapi.domain.model.MailMessage;
-import com.example.jobagapi.domain.model.PostulantJob;
-import com.example.jobagapi.domain.model.ProfessionalProfile;
 import com.example.jobagapi.domain.service.MailMessageService;
-import com.example.jobagapi.exception.ResourceNotFoundException;
 import com.example.jobagapi.resource.*;
 import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
@@ -13,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,20 +19,26 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
 public class MailMessageController {
-
     @Autowired
     private MailMessageService mailmessageService;
-
     @Autowired
     private ModelMapper mapper;
 
+    @Operation(summary="Create Mail Message", description="Create Mail Message", tags={"mail_messages"})
+    @PostMapping("/postulants/{postulantId}/employeers/{employeerId}/mailmessages")
+    public MailMessageResource createMailMessage(
+            @PathVariable Long postulantId,
+            @PathVariable Long employeerId,
+            @Valid @RequestBody SaveMailMessageResource resource) {
+        return convertToResource(mailmessageService.createMailMessage(postulantId,employeerId,convertToEntity(resource)));
+    }
 
-    @Operation(summary="Get all postulant job by postulant ID", description="Get all mail message by postulant ID", tags={"mailmesssages"})
-    @GetMapping("/postulant/{postulantId}/mailmessages")
-    public Page<MailMessageResource> getAllMailMessageByPostulantId(
+    @Operation(summary="Get all mail message by postulant ID", description="Get all mail message by postulant ID", tags={"mail_messages"})
+    @GetMapping("/postulants/{postulantId}/mailmessages")
+    public Page<MailMessageResource> getMaillMessageByPostulantId(
             @PathVariable Long postulantId,
             Pageable pageable) {
-        Page<MailMessage> mailMessagePage = mailmessageService.getAllMailMessageByPostulantId(postulantId, pageable);
+        Page<MailMessage> mailMessagePage = mailmessageService.getAllMailMessagebByPostulantId(postulantId, pageable);
         List<MailMessageResource> resources = mailMessagePage.getContent()
                 .stream()
                 .map(this::convertToResource)
@@ -44,42 +46,51 @@ public class MailMessageController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
-    @Operation(summary="Get postulants by mailmessagesId", description="Get postulants by mailmesssagesId", tags={"mailmessages"})
-    @GetMapping("/postulant/{postulantId}/employeer/{employeerId}")
-    public MailMessageResource getPostulantIdByIdAndEmployeerId(
-            @PathVariable Long postulantId,
-            @PathVariable Long employeerId) {
-        return convertToResource(mailmessageService.getPostulantIdByIdAndEmployeerId(postulantId, employeerId));
+    @Operation(summary="Get all mail message by employeer ID", description="Get all mail message by employeer ID", tags={"mail_messages"})
+    @GetMapping("/employeers/{employeerId}/mailmessages")
+    public Page<MailMessageResource> getMaillMessageByEmployeerId(
+            @PathVariable Long employeerId,
+            Pageable pageable) {
+        Page<MailMessage> mailMessagePage = mailmessageService.getAllMailMessagebByEmployeerId(employeerId, pageable);
+        List<MailMessageResource> resources = mailMessagePage.getContent()
+                .stream()
+                .map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources, pageable, resources.size());
     }
 
-    @Operation(summary="Postulant Jobs", description="Create mailmessages", tags={"mail_messages"})
-    @PostMapping("/postulant/{postulantId}/employeer/{employeerId}/mailmessage")
-    public MailMessageResource createMailMessage(
-            @PathVariable Long postulantId,
-            @PathVariable Long employeersId,
-            @Valid @RequestBody SaveMailMessageResource resource) {
-        return convertToResource(mailmessageService.createMailMessage(postulantId,employeersId,convertToEntity(resource)));
-    }
-
-    @Operation(summary="Put Mail Message", description="Update mailmessages", tags={"mail_messages"})
-    @PutMapping("/postulant/{postulantId}/employeer/{employeerId}/mailmessage/{mailmessageId}")
-    public MailMessageResource updateMailMessage(
+    @Operation(summary="Get all mail message by postulant Id and employeer Id", description="Get all mail message by postulant Id and employeer Id", tags={"mail_messages"})
+    @GetMapping("/postulants/{postulantId}/employeers/{employeerId}/mailmessages")
+    public Page<MailMessageResource> getAllMailMessagesByPostulantIdAnEmployeerId(
             @PathVariable Long postulantId,
             @PathVariable Long employeerId,
-            @PathVariable Long mailmessageId,
-            @Valid @RequestBody SaveMailMessageResource resource) {
-        return convertToResource(mailmessageService.updateMailMessage(postulantId, employeerId,mailmessageId,convertToEntity(resource)));
+            Pageable pageable) {
+        Page<MailMessage> mailMessagePage = mailmessageService.getAllMailMessagesByPostulantIdAnEmployeerId(postulantId, employeerId, pageable);
+        List<MailMessageResource> resources = mailMessagePage.getContent()
+                .stream()
+                .map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources,pageable, resources.size());
     }
 
-    @Operation(summary="Delete postulant job by postulant ID and job offer ID", description="Delete postulant job by postulant ID and mail message ID", tags={"mail_messages"})
-    @DeleteMapping("/postulant/{postulantId}/employeer/{employeerId}/mailmessage/{mailmessageId}")
+    @Operation(summary="Delete mail messages by postulant ID and employeer ID", description="Delete mail messages by postulant ID and employeer ID", tags={"mail_messages"})
+    @DeleteMapping("/postulants/{postulantId}/employeers/{employeerId}/mailmessages/{mailMessageId}")
     public ResponseEntity<?> deleteMailMessage(
             @PathVariable Long postulantId,
             @PathVariable Long employeerId,
-            @PathVariable Long mailmessageId) {
-        return mailmessageService.deleteMailMessage(postulantId, employeerId, mailmessageId);
+            @PathVariable Long mailMessageId) {
+        return mailmessageService.deleteMailMessage(postulantId, employeerId, mailMessageId);
     }
 
+    @Operation(summary="Put Mail Messages", description="Update Put Mail Messages by Postulant Id and Employeer Id", tags={"mail_messages"})
+    @PutMapping("/postulants/{postulantId}/employeers/{employeerId}/mailmessages/{mailMessageId}")
+    public MailMessageResource updateMailMessage(
+            @PathVariable Long postulantId,
+            @PathVariable Long employeerId,
+            @PathVariable Long mailMessageId,
+            @Valid @RequestBody SaveMailMessageResource resource) {
+        return convertToResource(mailmessageService.updateMailMessage(postulantId, employeerId,mailMessageId,convertToEntity(resource)));
+    }
     private MailMessage convertToEntity(SaveMailMessageResource resource) {
         return mapper.map(resource, MailMessage.class);
     }

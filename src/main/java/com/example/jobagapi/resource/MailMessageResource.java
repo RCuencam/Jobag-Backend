@@ -1,44 +1,34 @@
 package com.example.jobagapi.resource;
 
-import com.example.jobagapi.domain.model.MailMessage;
-
 public class MailMessageResource {
-
-    int id;
+    Long id;
     String message;
-    String document;
-    private boolean aceppt;
+    String document_Link;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public MailMessageResource setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public MailMessageResource setMessage(String message) {
         this.message = message;
+        return this;
     }
 
-    public String getDocument() {
-        return document;
+    public String getDocument_Link() {
+        return document_Link;
     }
 
-    public void setDocument(String document) {
-        this.document = document;
-    }
-
-    public boolean isAceppt() {
-        return aceppt;
-    }
-
-    public MailMessageResource setAceppt(boolean aceppt) {
-        this.aceppt = aceppt;
+    public MailMessageResource setDocument_Link(String document_Link) {
+        this.document_Link = document_Link;
         return this;
     }
 }

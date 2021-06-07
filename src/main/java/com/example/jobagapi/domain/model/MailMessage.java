@@ -2,10 +2,10 @@ package com.example.jobagapi.domain.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "mailmessages")
@@ -13,89 +13,80 @@ public class MailMessage extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
-    @OneToOne( fetch = FetchType.LAZY, optional = false)
+    //Relacion con postulante
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_postulant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Postulant postulant;
 
-    @NotNull
-    @Length(max = 100)
-    private String message;
-
-    private String document;
-
-    @OneToOne( fetch = FetchType.LAZY, optional = false)
+    //Relacion con el empleador
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_employeer_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Employeer employeer;
 
     @NotNull
-    private boolean aceppt;
+    private String message;
 
-    public MailMessage(boolean aceppt) {
-        this.aceppt = aceppt;
+    @NotNull
+    @Size(max = 40)
+    private String document_Link;
+
+
+    public MailMessage() {
     }
 
-    public MailMessage(int id, Postulant postulant, String message, String document, Employeer employeer){
+    public MailMessage(Long id, String message, String document_Link) {
         this.id = id;
-        this.postulant = postulant;
         this.message = message;
-        this. document = document;
-        this.employeer = employeer;
+        this.document_Link = document_Link;
     }
 
-    public MailMessage(){
 
-    }
-
-    public boolean isAceppt() {
-        return aceppt;
-    }
-
-    public MailMessage setAceppt(boolean aceppt) {
-        this.aceppt = aceppt;
-        return this;
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public MailMessage setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public Postulant getPostulant() {
         return postulant;
     }
 
-    public void setPostulant(Postulant postulant) {
+    public MailMessage setPostulant(Postulant postulant) {
         this.postulant = postulant;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getDocument() {
-        return document;
-    }
-
-    public void setDocument(String document) {
-        this.document = document;
+        return this;
     }
 
     public Employeer getEmployeer() {
         return employeer;
     }
 
-    public void setEmployeer(Employeer employeer) {
+    public MailMessage setEmployeer(Employeer employeer) {
         this.employeer = employeer;
+        return this;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public MailMessage setMessage(String message) {
+        this.message = message;
+        return this;
+    }
+
+    public String getDocument_Link() {
+        return document_Link;
+    }
+
+    public MailMessage setDocument_Link(String document_Link) {
+        this.document_Link = document_Link;
+        return this;
     }
 }

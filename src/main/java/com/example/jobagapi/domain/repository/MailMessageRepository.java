@@ -12,12 +12,15 @@ import java.util.Optional;
 
 @Repository
 public interface MailMessageRepository extends JpaRepository<MailMessage, Long> {
-
     public Page<MailMessage> findById (Long Id, Pageable pageable);
-
-    public Optional<MailMessage> findByPostulantIdAndEmployeerId(Long postulantId, Long employeeerId);
-
     Page<MailMessage> findByPostulantId(Long postulantId, Pageable pageable);
-    Boolean existsByPostulantId(Long postulantId);
-    Boolean existsByEmployeerId(Long employeerId);
+    Page<MailMessage> findByEmployeerId(Long employeerId, Pageable pageable);
+
+    public Page<MailMessage> findByPostulantIdAndEmployeerId(Long postulantId, Long employeerId, Pageable pageable);
+
+
+
+
+    //Boolean existsByPostulantId(Long postulantId);
+    //Boolean existsByJobOfferId(Long jobOfferId);
 }

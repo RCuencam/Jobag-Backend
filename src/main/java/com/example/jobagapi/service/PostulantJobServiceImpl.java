@@ -36,7 +36,6 @@ public class PostulantJobServiceImpl implements PostulantJobService {
 
         return postulantRepository.findById(postulantId).map(postulant -> {
             postulantJob.setPostulant(postulant);
-            //EMPLOYEERREPOSITORY
             jobOfferRepository.findById(jobOfferId).map(jobOffer -> {
                 postulantJob.setJobOffer(jobOffer);
                 return postulantJobRepository.save(postulantJob);
