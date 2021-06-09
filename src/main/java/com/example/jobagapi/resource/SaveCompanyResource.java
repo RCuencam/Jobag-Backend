@@ -7,7 +7,7 @@ public class SaveCompanyResource {
 
     String name;
     String description;
-    String sector;
+
     String logo;
     Long ruc;
     String dirección;
@@ -28,13 +28,7 @@ public class SaveCompanyResource {
         this.description = description;
     }
 
-    public String getSector() {
-        return sector;
-    }
 
-    public void setSector(String sector) {
-        this.sector = sector;
-    }
 
     public String getLogo() {
         return logo;

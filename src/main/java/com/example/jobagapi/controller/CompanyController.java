@@ -49,10 +49,10 @@ public class CompanyController {
 
 
     @Operation(summary="Post companys", description="Create companys by employeer Id", tags={"companys"})
-    @PostMapping("/employeers/{employeerId}/companys")
+    @PostMapping("/employeers/{employeerId}/companys/sectors/{sectorId}")
     public CompanyResource createCompany(
             @PathVariable Long employeerId, @PathVariable Long sectorId,@Valid @RequestBody SaveCompanyResource resource) {
-        return convertToResource(companyService.createCompany(employeerId, convertToEntity(resource)));
+        return convertToResource(companyService.createCompany(employeerId,sectorId, convertToEntity(resource)));
     }
 
     @Operation(summary="Put companys", description="Update companys by employeer Id", tags={"companys"})
