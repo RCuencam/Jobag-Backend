@@ -3,6 +3,7 @@ package com.example.jobagapi.service;
 import com.example.jobagapi.domain.model.Company;
 import com.example.jobagapi.domain.repository.CompanyRepository;
 import com.example.jobagapi.domain.repository.EmployeerRepository;
+import com.example.jobagapi.domain.repository.SectorRepository;
 import com.example.jobagapi.domain.service.CompanyService;
 import com.example.jobagapi.exception.ResourceNotFoundException;
 
@@ -21,10 +22,14 @@ public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
 
+    @Autowired
+     private SectorRepository sectorRepository;
 
 
     @Override
     public Page<Company> getAllCompanysByEmployeerId(Long employeerId, Pageable pageable) {
+        if(!companyRepository.existsByEmployeerId(employeerId))
+            throw new ResourceNotFoundException("EmployeerId", "Id", employeerId);
         return companyRepository.findByEmployeerId(employeerId,pageable);
     }
 
@@ -32,8 +37,8 @@ public class CompanyServiceImpl implements CompanyService {
     public Company getCompanyByIdAndEmployeerId(Long employeerId, Long companyId) {
         return companyRepository.findByIdAndEmployeerId(employeerId,companyId)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "Lead not found with Id" + companyId+
-                                "and EmployeerId" + employeerId));
+                        "Company not found with Id " + companyId+
+                                "and EmployeerId " + employeerId));
 
     }
 
@@ -48,18 +53,48 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Company createCompany(Long employeerId, Company company) {
+    public Company createCompany(Long employeerId,Long sectorId, Company company) {
+
+        if(!employeerRepository.existsById(employeerId))
+            throw new ResourceNotFoundException("Employeer","Id",employeerId);
+            //Comprobamos que exista el employeer
+        else if (!sectorRepository.existsById(sectorId))
+            throw new ResourceNotFoundException("Sector","Id",sectorId);
 
         return employeerRepository.findById(employeerId).map(employeer -> {
-
             company.setEmployeer(employeer);
-            return companyRepository.save(company);
-        }).orElseThrow(() -> new ResourceNotFoundException(
-                "Employeer", "Id",employeerId));
+            sectorRepository.findById(sectorId).map(sector -> {
+                company.setSector(sector);
+                return  companyRepository.save(company);
+            }).orElseThrow(() -> new ResourceNotFoundException("Sector", "Id", sectorId));
+            return  companyRepository.save(company);
+        }).orElseThrow(() -> new ResourceNotFoundException("Employeer", "Id", employeerId));
 
     }
 
 
+
+    /*
+    //Comprobamos que exista el postulante
+        if(!postulantRepository.existsById(postulantId))
+            throw new ResourceNotFoundException("Postulant","Id",postulantId);
+        //Comprobamos que exista el employeer
+        else if (!employeerRepository.existsById(employeerId))
+            throw new ResourceNotFoundException("Employeer","Id",employeerId);
+
+        return postulantRepository.findById(postulantId).map(postulant -> {
+            mailMessage.setPostulant(postulant);
+            employeerRepository.findById(employeerId).map(employeer -> {
+                mailMessage.setEmployeer(employeer);
+                return  mailMessageRepository.save(mailMessage);
+            }).orElseThrow(() -> new ResourceNotFoundException("Employeer", "Id", employeerId));
+            return  mailMessageRepository.save(mailMessage);
+        }).orElseThrow(() -> new ResourceNotFoundException("Postulant", "Id", postulantId));
+
+
+
+
+    */
 
 
 

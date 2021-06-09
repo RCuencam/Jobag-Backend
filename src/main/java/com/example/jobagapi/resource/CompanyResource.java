@@ -5,7 +5,6 @@ public class CompanyResource {
     Long id;
     String name;
     String description;
-    String sector;
     String logo;
     Long ruc;
     String dirección;
@@ -35,13 +34,6 @@ public class CompanyResource {
         this.description = description;
     }
 
-    public String getSector() {
-        return sector;
-    }
-
-    public void setSector(String sector) {
-        this.sector = sector;
-    }
 
     public String getLogo() {
         return logo;
