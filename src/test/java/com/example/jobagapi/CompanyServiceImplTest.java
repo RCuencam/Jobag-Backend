@@ -49,15 +49,12 @@ public class CompanyServiceImplTest {
     @Autowired
     private CompanyService companyService;
 
-
-
     @TestConfiguration
     static class CompanyServiceImplTestConfiguration {
         @Bean
         public CompanyService CompanyService() {
             return new CompanyServiceImpl();
         }
-
     }
 
     @Test
@@ -121,32 +118,6 @@ public class CompanyServiceImplTest {
         // Arrange
         Long employeerId = 1L;
 
-
-        Employeer employeer = new Employeer(employeerId, "firstname", "lastname", "email", 98212L, "password", "document", " posicion");
-        Sector sector = new Sector().setId(1L);
-        Company company = new Company(1L, "name", "description", "logo", 123L, "dirección", employeer, sector);
-
-        Company companynew= new Company();
-
-
-
-        when(companyRepository.existsById(company.getId()))
-                .thenReturn(true);
-        when(employeerRepository.findById(employeerId))
-                .thenReturn(Optional.of(employeer));
-
-            }
-
-
-
-
-
-    @Test
-    @DisplayName("When get Create companys  With Valid employeerId and SectorId Then Returns Company")
-    public void WhengetCreatecompanysWithValidemployeerIdandSectorIdThenReturnsCompany() {
-        // Arrange
-        Long employeerId = 1L;
-
         User user = new User().setId(employeerId);
         Employeer employeer = new Employeer(employeerId, "firstname", "lastname", "email", 98212L, "password", "document", " posicion");
         Sector sector = new Sector();
@@ -172,6 +143,25 @@ public class CompanyServiceImplTest {
     }
 
 
+    @Test
+    @DisplayName("When create all companys by employeerId With Valid employeerId Then Returns Company")
+    public void WhencreatecompanysbyemployeerIdWithValidemployeerIdThenReturnsResourceNotFoundException() {
+        // Arrange
+        Long employeerId = 1L;
+
+
+        Employeer employeer = new Employeer(employeerId, "firstname", "lastname", "email", 98212L, "password", "document", " posicion");
+        Sector sector = new Sector().setId(1L);
+        Company company = new Company(1L, "name", "description", "logo", 123L, "dirección", employeer, sector);
+
+        Company companynew= new Company();
+
+
+
+
+
+
+    }
 
 }
 
