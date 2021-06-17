@@ -52,7 +52,7 @@ public class CompanyController {
     @PostMapping("/employeers/{employeerId}/companys")
     public CompanyResource createCompany(
             @PathVariable Long employeerId, @PathVariable Long sectorId,@Valid @RequestBody SaveCompanyResource resource) {
-        return convertToResource(companyService.createCompany(employeerId, convertToEntity(resource)));
+        return convertToResource(companyService.createCompany(employeerId,sectorId, convertToEntity(resource)));
     }
 
     @Operation(summary="Put companys", description="Update companys by employeer Id", tags={"companies"})
